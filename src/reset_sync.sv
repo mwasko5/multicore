@@ -20,7 +20,7 @@ module reset_sync (
       reset_sync2_s <= reset_sync1_s;
     end   
 
-    assign SYNC_RST_N = reset_sync2;
+    assign SYNC_RST_N = reset_sync2_s;
     
   end
   
