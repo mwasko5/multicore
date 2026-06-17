@@ -23,3 +23,5 @@ module reset_sync (
     assign SYNC_RST_N = reset_sync2;
     
   end
+  
+endmodule
