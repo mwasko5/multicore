@@ -3,9 +3,9 @@ module adder #(
 ) (
     input logic [DATA_WIDTH - 1:0] INPUT_A, INPUT_B,
 
-    output logic [DATA_WIDTH - 1:0] OUTPUT
+    output logic [DATA_WIDTH - 1:0] ADDER_OUTPUT
 );
 
-    assign OUTPUT = INPUT_A + INPUT_B;
+    assign ADDER_OUTPUT = INPUT_A + INPUT_B;
 
 endmodule
