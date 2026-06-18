@@ -5,11 +5,11 @@ module multiplexer_2x1 #(
     
     input logic SELECT,
 
-    output logic [DATA_WIDTH - 1:0] OUTPUT
+    output logic [DATA_WIDTH - 1:0] MUX_OUTPUT
 );
 
     // select = 0: INPUT_A
     // select = 1: INPUT_B
-    assign OUTPUT = SELECT ? INPUT_B : INPUT_A;
+    assign MUX_OUTPUT = SELECT ? INPUT_B : INPUT_A;
 
 endmodule

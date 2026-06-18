@@ -74,6 +74,17 @@ module top (
     .MEM_READ(controller_mem_read_s) // output logic 
   );
 
+  multiplexer_2x1 # (
+    .DATA_WIDTH(5)
+  ) write_register_mux (
+    .INPUT_A(instruction_s[20:16]), // input logic [63:0] 
+    .INPUT_B(instruction_s[15:11]), // input logic [63:0]
+    
+    .SELECT(1'b0), // input logic 
+
+    .MUX_OUTPUT(instruction_mux_s) // output logic [63:0]
+  );
+
   register_file register_file1(
     .CLK(CLK),
 
@@ -115,6 +126,15 @@ module top (
     .WRITE_DATA(read_data2_s), // input logic [63:0]
 
     .READ_DATA(read_data_memory_s) // output logic [63:0] 
+  );
+
+  multiplexer_2x1 data_memory_mux (
+    .INPUT_A(ALU_OUT), // input logic [63:0] 
+    .INPUT_B(read_data_memory_s), // input logic [63:0]
+    
+    .SELECT(1'b0), // input logic 
+
+    .MUX_OUTPUT(data_memory_s) // output logic [63:0]
   );
 
   always_comb begin
