@@ -11,6 +11,14 @@ module data_memory (
 
   logic [63:0] mem [0:1023];
 
+  // Initialize memory (perfect for simulation or hardcoded FPGA bitstreams)
+    initial begin
+      // Clear everything to NOPs first
+      for (int i = 0; i < 1024; i++) begin
+          mem[i] = '0;
+      end
+  end
+
   always_ff @(posedge CLK) begin
     if (MEM_READ) begin
       READ_DATA <= mem[ADDRESS[11:2]];

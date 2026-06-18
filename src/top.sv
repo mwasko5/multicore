@@ -49,7 +49,7 @@ module top (
     .PC_RESULT(pc_result_s) // output logic [31:0]
   );
 
-  logic [31:0] instruction_s;
+  (* keep = "true" *) logic [31:0] instruction_s;
 
   instruction_memory instruction_memory1 (
     .ADDRESS(pc_result_s), // input  logic [31:0] // Input Address from PC
@@ -71,8 +71,10 @@ module top (
     .REG_WRITE(controller_reg_write_s), // output logic 
     .ALU_OP(controller_alu_select_s), // output logic [1:0]
     .MEM_WRITE(controller_mem_write_s), // output logic 
-    .MEM_READ(controller_mem_read_s) // output logic 
-  );
+    .MEM_READ(controller_mem_read_s), // output logic 
+    .REG_DEST(controller_reg_file_in_mux_s), // output logic
+    .MEM_TO_REG(controller_data_memory_mux_s) // output logic
+  ); 
 
   multiplexer_2x1 # (
     .DATA_WIDTH(5)
@@ -80,7 +82,7 @@ module top (
     .INPUT_A(instruction_s[20:16]), // input logic [63:0] 
     .INPUT_B(instruction_s[15:11]), // input logic [63:0]
     
-    .SELECT(1'b0), // input logic 
+    .SELECT(controller_reg_file_in_mux_s), // input logic 
 
     .MUX_OUTPUT(instruction_mux_s) // output logic [63:0]
   );
@@ -132,7 +134,7 @@ module top (
     .INPUT_A(ALU_OUT), // input logic [63:0] 
     .INPUT_B(read_data_memory_s), // input logic [63:0]
     
-    .SELECT(1'b0), // input logic 
+    .SELECT(controller_data_memory_mux_s), // input logic 
 
     .MUX_OUTPUT(data_memory_s) // output logic [63:0]
   );

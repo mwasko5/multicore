@@ -7,7 +7,9 @@ module controller (
   output logic REG_WRITE,
   output logic [1:0] ALU_OP,
   output logic MEM_WRITE,
-  output logic MEM_READ
+  output logic MEM_READ,
+  output logic REG_DEST,
+  output logic MEM_TO_REG
 );
   
   logic [31:0] instruction_stage1_s;
@@ -42,16 +44,28 @@ module controller (
           // ADD ($add rd, rs1, rs2)
           REG_WRITE = 1'b1;
           ALU_OP    = 2'b00;
+          MEM_WRITE = 1'b0;
+          MEM_READ  = 1'b0;
+          REG_DEST  = 1'b0;
+          MEM_TO_REG = 1'b0;
       end
       else if (instruction_s[31:25] == 7'b0100000 && instruction_s[14:12] == 3'b000 && instruction_s[6:0] == 7'b0110011) begin 
           // SUB ($sub rd, rs1, rs2)
           REG_WRITE = 1'b1;
           ALU_OP    = 2'b01;
+          MEM_WRITE = 1'b0;
+          MEM_READ  = 1'b0;
+          REG_DEST  = 1'b0;
+          MEM_TO_REG = 1'b0;
       end
       else if (instruction_s[6:0] == 7'b0010011) begin
           // ADDI (I-Type Opcode matched with your instruction_memory.sv test vectors)
           REG_WRITE = 1'b1;
           ALU_OP    = 2'b00; // ALU performs addition
+          MEM_WRITE = 1'b0;
+          MEM_READ  = 1'b0;
+          REG_DEST  = 1'b0;
+          MEM_TO_REG = 1'b0;
       end
   end
 

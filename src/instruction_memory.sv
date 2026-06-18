@@ -9,7 +9,7 @@ module instruction_memory (
     input  logic [31:0] ADDRESS,     // Input Address from PC
     output logic [31:0] INSTRUCTION  // Output Instruction word
 );
-
+    
     // 1024 words of 32-bit memory
     logic [31:0] mem [0:1023];
 
