@@ -17,7 +17,7 @@ module instruction_memory (
     initial begin
         // Clear everything to NOPs first
         for (int i = 0; i < 1024; i++) begin
-            mem[i] = 32'0;
+            mem[i] = '0;
         end
 
         // Hardcode your machine code entries here just like your lab code:

@@ -24,6 +24,8 @@ module io_sync #(
     end
   end
 
-  assign IO_OUT <= stage2_s;
-
+  always_comb begin
+    IO_OUT = stage2_s;
+  end
+  
 endmodule
