@@ -8,9 +8,9 @@ module top (
     output logic LED
 );
     
-  logic sync_rst_n_s;
+  (* keep = "true" *) logic sync_rst_n_s;
   
-  logic led_s;
+  (* keep = "true" *) logic led_s;
   
   reset_sync reset_synchronizer (
     .CLK(CLK),
@@ -27,14 +27,14 @@ module top (
     .IO_OUT(LED)
   );
   
-  logic [31:0] pc_result_s;
-  logic [31:0] pc_adder_out_s;
+  (* keep = "true" *) logic [31:0] pc_result_s;
+  (* keep = "true" *) logic [31:0] pc_adder_out_s;
 
   adder #(
     .DATA_WIDTH(32)
   ) pc_adder (
     .INPUT_A(pc_result_s), 
-    .INPUT_B(32'h00000004),
+    .INPUT_B(32'd4),
 
     .ADDER_OUTPUT(pc_adder_out_s)
   );
@@ -56,13 +56,13 @@ module top (
     .INSTRUCTION(instruction_s) // output logic [31:0] // Output Instruction word
   );
 
-  logic [63:0] read_data1_s;
-  logic [63:0] read_data2_s;
+  (* keep = "true" *) logic [63:0] read_data1_s;
+  (* keep = "true" *) logic [63:0] read_data2_s;
 
-  logic [1:0] controller_alu_select_s;
-  logic controller_reg_write_s;
-  logic controller_mem_read_s;
-  logic controller_mem_write_s;
+  (* keep = "true" *) logic [1:0] controller_alu_select_s;
+  (* keep = "true" *) logic controller_reg_write_s;
+  (* keep = "true" *) logic controller_mem_read_s;
+  (* keep = "true" *) logic controller_mem_write_s;
   
   controller controller1 (
     .CLK(CLK), // input logic 
@@ -99,9 +99,9 @@ module top (
     .READ_DATA_2(read_data2_s) // output logic [63:0] 
   );
 
-  logic [63:0] alu_out_s;
-  logic alu_zero_s;
-  logic alu_overflow_s;
+  (* keep = "true" *) logic [63:0] alu_out_s;
+  (* keep = "true" *) logic alu_zero_s;
+  (* keep = "true" *) logic alu_overflow_s;
 
   alu_integer alu (
     .IN_A(read_data1_s), // input logic [63:0] 
@@ -115,7 +115,7 @@ module top (
     .OVERFLOW(alu_overflow_s) // output logic // overflow signal
   );
 
-  logic [63:0] read_data_memory_s;
+  (* keep = "true" *) logic [63:0] read_data_memory_s;
 
   data_memory data_memory1 (
     .CLK(CLK), // input logic
